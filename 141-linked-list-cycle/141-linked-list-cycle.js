@@ -11,14 +11,12 @@
  * @return {boolean}
  */
 var hasCycle = function(head) {
-    const refSet = new Set()
-    let curr=head;
-    while(curr){
-        if(refSet.has(curr)){
+    let faster=head,slower=head;
+    while(faster&&faster.next){
+        faster=faster.next.next;
+        slower=slower.next;
+        if(faster==slower){
             return true;
-        }else{
-            refSet.add(curr);
-            curr=curr.next;
         }
     }
     return false;
